@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="monetag" content="7c7d3cbdc461a0602f82d4abb8234d2b"/>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="ToolMint - Free online tools for everyday tasks.">
+
+<title>ToolMint - Free Online Tools</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+header {
+    background: white;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-content {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 15px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 25px 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 35px 10px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+}
+
+.tool {
+    background: white;
+    padding: 22px;
+    margin-bottom: 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.tool h2 {
+    margin-top: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 160px;
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    resize: vertical;
+}
+
+.result {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.box {
+    flex: 1;
+    background: #f0f2f5;
+    padding: 15px;
+    text-align: center;
+    border-radius: 9px;
+}
+
+.number {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+button {
+    padding: 12px 18px;
+    margin: 5px 3px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    background: #eeeeee;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        margin: 0 6px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .result {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+🛠️ ToolMint
+</div>
+
+<nav>
+
+<a href="#home">Home</a>
+
+<a href="#tools">Tools</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<section class="hero" id="home">
+
+<h1>Free Online Tools</h1>
+
+<p>
+Simple, fast and free tools for everyday tasks.
+</p>
+
+</section>
+
+
+<section id="tools">
+
+
+<!-- WORD COUNTER -->
+
+<div class="tool">
+
+<h2>Word & Character Counter</h2>
+
+<p>
+Type or paste your text below:
+</p>
+
+<textarea
+id="text"
+placeholder="Type your text here..."></textarea>
+
+
+<div class="result">
+
+<div class="box">
+
+<div class="number" id="words">
+0
+</div>
+
+Words
+
+</div>
+
+
+<div class="box">
+
+<div class="number" id="characters">
+0
+</div>
+
+Characters
+
+</div>
+
+
+<div class="box">
+
+<div class="number" id="withoutSpaces">
+0
+</div>
+
+Without Spaces
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TEXT CASE CONVERTER -->
+
+<div class="tool">
+
+<h2>Text Case Converter</h2>
+
+<p>
+Enter your text:
+</p>
+
+<textarea
+id="caseText"
+placeholder="Type your text here..."></textarea>
+
+
+<div>
+
+<button onclick="makeUppercase()">
+UPPERCASE
+</button>
+
+<button onclick="makeLowercase()">
+lowercase
+</button>
+
+<button onclick="makeTitleCase()">
+Title Case
+</button>
+
+<button onclick="clearText()">
+Clear
+</button>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+<footer>
+
+<p>
+© 2026 ToolMint. All rights reserved.
+</p>
+
+<p>
+Free online tools for everyone.
+</p>
+
+</footer>
+
+
+<script>
+
+
+// WORD COUNTER
+
+const text =
+document.getElementById("text");
+
+
+text.addEventListener("input", function() {
+
+let value = text.value;
+
+let words =
+value.trim() === ""
+? 0
+: value.trim().split(/\s+/).length;
+
+let characters =
+value.length;
+
+let withoutSpaces =
+value.replace(/\s/g, "").length;
+
+
+document.getElementById("words")
+.textContent = words;
+
+document.getElementById("characters")
+.textContent = characters;
+
+document.getElementById("withoutSpaces")
+.textContent = withoutSpaces;
+
+});
+
+
+// UPPERCASE
+
+function makeUppercase() {
+
+let box =
+document.getElementById("caseText");
+
+box.value =
+box.value.toUpperCase();
+
+}
+
+
+// LOWERCASE
+
+function makeLowercase() {
+
+let box =
+document.getElementById("caseText");
+
+box.value =
+box.value.toLowerCase();
+
+}
+
+
+// TITLE CASE
+
+function makeTitleCase() {
+
+let box =
+document.getElementById("caseText");
+
+box.value =
+box.value
+.toLowerCase()
+.replace(/\b\w/g, function(letter) {
+
+return letter.toUpperCase();
+
+});
+
+}
+
+
+// CLEAR
+
+function clearText() {
+
+document.getElementById("caseText")
+.value = "";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
